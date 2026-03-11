@@ -21,7 +21,7 @@ def get_kospi_list():
     
     for page in range(1, 2):
         url = base_url.format(page)
-        res = requests.get(url, headers=headers)
+        res = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
 
         rows = soup.select("table.type_2 tbody tr")
@@ -45,6 +45,7 @@ def get_kospi_list():
 # ---------------------------
 
 def calculate_data(date_input):
+    print("stocks:", len(stocks))
     stocks = get_kospi_list()[:200]
 
     input_date = pd.to_datetime(date_input)
