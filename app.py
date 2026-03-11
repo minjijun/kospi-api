@@ -19,7 +19,7 @@ def get_kospi_list():
 
     stocks = []
     
-    for page in range(1, 5):
+    for page in range(1, 2):
         url = base_url.format(page)
         res = requests.get(url, headers=headers)
         soup = BeautifulSoup(res.text, "html.parser")
