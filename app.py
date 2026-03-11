@@ -148,14 +148,24 @@ def download_excel():
 @app.route("/api/kospi")
 def api_kospi():
 
-    date_input = request.args.get("date")
+    try:
 
-    if not date_input:
-        return jsonify({"error": "date required"}), 400
+        date = request.args.get("date")
 
-    data = calculate_data(date_input)
+        if not date:
+            return jsonify({"error": "date required"}), 400
 
-    return jsonify(data)
+        data = calculate_data(date)
+
+        return jsonify(data)
+
+    except Exception as e:
+
+        print("API ERROR:", e)
+
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 # ---------------------------
 # 4. 실행
